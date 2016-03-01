@@ -1,43 +1,44 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+Exclude idea project configuration files
+.idea
+*.iml
+*.ipr
+*.iws
+*.ids
+*.log
 
-# Folder config file
-Desktop.ini
+#Exclude eclipse project files
+.classpath
+.project
+.settings
+.sass-cache
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
+#Exclude OSX system files
+.DS-Store
 .DS_Store
-.AppleDouble
-.LSOverride
+web-app/plugins
 
-# Thumbnails
-._*
+#Exclude project release file
+*.war
 
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
+#Exclude classes
+target
+/web-app/WEB-INF/classes
+/target/*/*.class
+out
+static
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+#Exclude gradle files
+.gradle
+build
+gradle
+
+#Exclude db files
+*.db
+
+cobertura.ser
+.sonar
+*-ide-plugin.xml
+
+.sass-cache
+
+
