@@ -1,7 +1,7 @@
 >mvn archetype:generate
 ...
 :maven-archetype-webapp
-��ʼjar��������
+³õÊ¼jar°üÒÀÀµ£º
     <dependency>
       <groupId>org.apache.struts</groupId>
       <artifactId>struts2-core</artifactId>
@@ -13,3 +13,8 @@
       <artifactId>javassist</artifactId>
       <version>3.12.1.GA</version>
     </dependency>
+    
+    1.用maven建立struts2的jar包依赖，自动下载需要的jar包
+    2.在web.xml中配置struts的filter
+    3.在src下创建struts.xml配置文件
+    4.创建Action类填写业务代码
