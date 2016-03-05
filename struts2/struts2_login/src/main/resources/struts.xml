@@ -4,6 +4,14 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+    <!--配置struts属性-->
+    <!--乱码解决，配置编码格式-->
+    <constant name="struts.custom.i18n.resources" value="UTF-8"/>
+    <!--设置为开发模式-->
+    <constant name="struts.devMode" value="true"/>
+    <!--关联其他的xml文件-->
+    <include file="/config/user/user.xml"/>
+
     <package name="default" extends="struts-default">
         <action name="login" class="com.rocky.LoginAction">
             <result name="success">/success.jsp</result>

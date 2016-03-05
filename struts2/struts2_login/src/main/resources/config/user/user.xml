@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="user" namespace="/user" extends="struts-default">
+        <!--标签的书写顺序要符合struts-2.3.dtd中的书写规范-->
+
+        <!--默认执行的action,作用：当请求的action不存在时访问默认action-->
+        <default-action-ref name="default"/>
+
+        <!--配置全局结果集-->
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
+
+        <action name="add" class="com.rocky.UserAction" method="addUser">
+            <!--result type默认为dispatcher,其他选项参考struts-default.xml中的<result-types>-->
+            <result name="success" type="dispatcher">/success.jsp</result>
+            <result name="failed">/login.jsp</result>
+        </action>
+
+        <action name="default">
+            <result>/error.jsp</result>
+        </action>
+
+    </package>
+</struts>
