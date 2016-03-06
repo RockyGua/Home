@@ -13,3 +13,6 @@
       <artifactId>javassist</artifactId>
       <version>3.12.1.GA</version>
     </dependency>
+
+
+JSP中的表单属性name应该和Action类中的属性名一致，同时要有get和set方法。

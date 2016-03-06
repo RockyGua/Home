@@ -15,7 +15,7 @@
             <result name="login">/login.jsp</result>
         </global-results>
 
-        <action name="add" class="com.rocky.UserAction" method="addUser">
+        <action name="add" class="com.rocky.original.UserAction" method="addUser">
             <!--result type默认为dispatcher,其他选项参考struts-default.xml中的<result-types>-->
             <result name="success" type="dispatcher">/success.jsp</result>
             <result name="failed">/login.jsp</result>

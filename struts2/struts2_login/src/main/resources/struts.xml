@@ -11,9 +11,10 @@
     <constant name="struts.devMode" value="true"/>
     <!--关联其他的xml文件-->
     <include file="/config/user/user.xml"/>
+    <include file="/config/user/user_field_driven.xml"/>
 
     <package name="default" extends="struts-default">
-        <action name="login" class="com.rocky.LoginAction">
+        <action name="login" class="com.rocky.original.LoginAction">
             <result name="success">/success.jsp</result>
             <result name="failed">/login.jsp</result>
         </action>

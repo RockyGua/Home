@@ -1,0 +1,5 @@
+Action有三种实现方式：
+1.常用的就是直接定义一个普通的Action类
+2.实现Action接口，重写execute方法。好处：代码会规范一些，不容易写错方法名
+3.继承ActionSupport,重写里面的一些方法。好处：ActionSupport里面有一些现成的已经实现的方法直接继承，如：验证
+
