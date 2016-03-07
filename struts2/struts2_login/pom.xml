@@ -26,6 +26,13 @@
       <artifactId>javassist</artifactId>
       <version>3.12.1.GA</version>
     </dependency>
+
+    <dependency>
+        <groupId>tomcat</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>5.5.23</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>struts2_login</finalName>
