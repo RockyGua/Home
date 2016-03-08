@@ -17,6 +17,9 @@ public class LoginAction {
             request.getSession().setAttribute("user", userName);
             //第二种获取request的方式：request = (HttpServletRequest)ServletActionContext.getRequest();
             //第三种获取方式：通过implements ServletRequestAware
+            //      private HttpServletRequest request;
+            //      @override
+            //      public void setServletRequest(HttpServletRequest request) { this.request = request;}
 
             return "success";
         }

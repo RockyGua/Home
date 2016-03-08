@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="default" extends="struts-default">
+        <action name="login" class="com.rocky.action.LoginAction" method="login">
+            <result name="success">/login.jsp</result>
+            <result name="error">/index.jsp</result>
+        </action>
+
+        <action name="authorize" class="com.rocky.action.LoginAction" method="authorize">
+            <result name="success" type="redirectAction">list</result>
+            <result name="error">/login.jsp</result>
+        </action>
+
+        <action name="list" class="com.rocky.action.UserAction" method="list">
+            <result name="success">/user/list.jsp</result>
+        </action>
+    </package>
+
+</struts>
