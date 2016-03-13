@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="hello" namespace="/hello" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="time" class="com.rocky.hello.interceptor.TimeInterceptor"/>
+
+            <!--4.当action应用中的拦截器个数比较多时，可以将多个拦截器放入到一个拦截器栈中
+            <interceptor-stack name="myStack">
+                    <interceptor-ref name="time"/>
+                    <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>-->
+        </interceptors>
+
+        <!--5.当自定义拦截器栈在这个包下的所有action都使用时，可以定义为默认的拦截器栈，或默认的拦截器
+        <default-interceptor-ref name="myStack"/>-->
+
+        <action name="hello" class="com.rocky.hello.action.HelloAction">
+            <result>/index.jsp</result>
+            <interceptor-ref name="time"/>
+            <!--3.引用默认的拦截器栈，引用拦截器和引用拦截器栈的方式一样-->
+            <interceptor-ref name="defaultStack"/>
+
+            <!--以下直接引用自己的拦截器栈，而不需要再在每个action中分别定义重复的拦截器
+            <interceptor-ref name="myStack"/>-->
+        </action>
+    </package>
+</struts>
