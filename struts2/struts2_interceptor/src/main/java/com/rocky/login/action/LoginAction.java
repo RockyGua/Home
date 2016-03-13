@@ -25,6 +25,20 @@ public class LoginAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * 此方法是为了验证方法拦截器起到作用
+     */
+    public String update() {
+        return Action.SUCCESS;
+    }
+
+    /**
+     * 此方法是为了验证方法拦截器起到作用
+     */
+    public String delete() {
+        return Action.SUCCESS;
+    }
+
     public String getName() {
         return name;
     }

@@ -8,6 +8,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 
     @Override
     public String intercept(ActionInvocation invocation) throws Exception {
+        System.out.println("action interceptor is invoking.");
         String actionName = invocation.getProxy().getActionName();
         if (actionName.equals("login"))
         {

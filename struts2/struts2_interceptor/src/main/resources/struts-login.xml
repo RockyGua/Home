@@ -9,13 +9,20 @@
     <package name="login" namespace="/login" extends="struts-default">
         <interceptors>
             <interceptor name="login" class="com.rocky.login.interceptor.LoginInterceptor"/>
+            <interceptor name="methodInterceptor" class="com.rocky.login.interceptor.MethodInterceptor"/>
 
             <interceptor-stack name="myStack">
+                <interceptor-ref name="methodInterceptor">
+                    <param name="includeMethods">update,delete</param>
+                    <param name="excludeMethods">list</param>
+                </interceptor-ref>
+
                 <interceptor-ref name="login"/>
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
         </interceptors>
 
+        <!--全局拦截器-->
         <default-interceptor-ref name="myStack"/>
 
         <global-results>
@@ -28,6 +35,16 @@
 
         <!--此方法是为了验证全局的拦截器起到作用,如果已经通过login登录，则可以直接访问，不然会被拦截器拦截-->
         <action name="list" class="com.rocky.login.action.LoginAction" method="list">
+            <result name="success">/login/success.jsp</result>
+        </action>
+
+        <!--此方法是为了验证方法拦截器起到作用-->
+        <action name="update" class="com.rocky.login.action.LoginAction" method="update">
+            <result name="success">/login/success.jsp</result>
+        </action>
+
+        <!--此方法是为了验证方法拦截器起到作用-->
+        <action name="delete" class="com.rocky.login.action.LoginAction" method="delete">
             <result name="success">/login/success.jsp</result>
         </action>
     </package>
