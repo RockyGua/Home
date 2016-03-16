@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- 设置文件下载路径-->
+    <constant name="struts.multipart.saveDir" value="d:\"/>
+    <!-- 如果要设置过滤器的可上传文件的大小，此处设置不能小于过滤器-->
+    <constant name="struts.multipart.maxSize" value="20971520"/>
+
+    <package name="default" extends="struts-default">
+        <action name="upload" class="com.rocky.upload.UploadAction" method="upload">
+            <result name="success">/index.jsp</result>
+            <!-- 可设置上传文件的大小-->
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">20971520</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+    </package>
+
+</struts>
