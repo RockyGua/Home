@@ -18,6 +18,15 @@
             </interceptor-ref>
             <interceptor-ref name="defaultStack"/>
         </action>
+
+        <action name="batchUpload" class="com.rocky.upload.BatchUploadAction">
+            <result name="success">/index.jsp</result>
+            <!-- 可设置上传文件的大小-->
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">20971520</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+        </action>
     </package>
 
 </struts>
