@@ -27,6 +27,9 @@
             </interceptor-ref>
             <interceptor-ref name="defaultStack"/>
         </action>
+
+        <action name="download" class="com.rocky.download.DownloadAction">
+        </action>
     </package>
 
 </struts>
