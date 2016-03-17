@@ -30,6 +30,14 @@
 
         <action name="download" class="com.rocky.download.DownloadAction">
         </action>
+
+        <action name="streamDownload" class="com.rocky.download.StreamDownloadAction">
+            <result type="stream">
+                <!-- 名字应该与action类中getXXX方法名一致-->
+                <param name="inputName">myInputStream</param>
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
+            </result>
+        </action>
     </package>
 
 </struts>
