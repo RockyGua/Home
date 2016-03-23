@@ -2,7 +2,7 @@ package com.rocky.jdbc;
 
 import java.sql.*;
 
-public class Demo_transaction {
+public class Demo_03_transaction {
 
     public static void main(String[] args) {
         Connection connection = null;

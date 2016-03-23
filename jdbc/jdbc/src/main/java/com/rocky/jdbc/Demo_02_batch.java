@@ -2,7 +2,7 @@ package com.rocky.jdbc;
 
 import java.sql.*;
 
-public class Demo_batch {
+public class Demo_02_batch {
 
     public static void main(String[] args) {
 

@@ -1,3 +1,15 @@
+
+create table t_user
+(
+id int not null auto_increment,
+name varchar(20),
+age varchar(20),
+birthday date,
+myInfo text,
+img blob,
+primary key(id));
+
+
 事务的基本概念：
     一组要么同时执行成功，要么通知执行失败的SQL语句。是数据库操作的一个执行单元。
 
