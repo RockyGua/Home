@@ -1,5 +1,6 @@
 package com.rocky.sorm.bean;
 
+import java.util.List;
 import java.util.Map;
 
 public class TableInfo {
@@ -19,7 +20,18 @@ public class TableInfo {
      */
     private ColumnInfo onlyPriKey;
 
+    /**
+     * 如果是联合主键则存储在这里
+     */
+    private List<ColumnInfo> priKeys;
+
     public TableInfo() {
+    }
+
+    public TableInfo(String tname, List<ColumnInfo> priKeys, Map<String, ColumnInfo> columns) {
+        this.tname = tname;
+        this.priKeys = priKeys;
+        this.columns = columns;
     }
 
     public TableInfo(String tname, Map<String, ColumnInfo> columns, ColumnInfo onlyPriKey) {
@@ -50,5 +62,13 @@ public class TableInfo {
 
     public void setOnlyPriKey(ColumnInfo onlyPriKey) {
         this.onlyPriKey = onlyPriKey;
+    }
+
+    public List<ColumnInfo> getPriKeys() {
+        return priKeys;
+    }
+
+    public void setPriKeys(List<ColumnInfo> priKeys) {
+        this.priKeys = priKeys;
     }
 }
