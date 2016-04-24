@@ -6,6 +6,10 @@ import com.rocky.sorm.bean.TableInfo;
 import com.rocky.sorm.core.DBManager;
 import com.rocky.sorm.core.TypeConverter;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,12 +74,12 @@ public class JavaFileUtils {
         StringBuilder src = new StringBuilder();
 
         //package com.rocky.po
-        src.append("package "+ DBManager.getConf().getPoPackage() + "\n\n");
+        src.append("package "+ DBManager.getConf().getPoPackage() + ";\n\n");
 
         //import java.sql.*
         //import java.util.*
-        src.append("import java.sql.*\n");
-        src.append("import java.util.*\n\n");
+        src.append("import java.sql.*;\n");
+        src.append("import java.util.*;\n\n");
 
         //public class Emp{
         src.append("public class " + StringUtils.firstChar2UpperCase(tableInfo.getTname() + "{\n"));
@@ -97,5 +101,35 @@ public class JavaFileUtils {
         //生成类结束
         src.append("}\n");
         return src.toString();
+    }
+
+    /**
+     *
+     * @param tableInfo
+     * @param converter
+     */
+    public static void createJavaPOFile(TableInfo tableInfo, TypeConverter converter) {
+        String src = createJavaSrc(tableInfo, converter);
+
+        String srcPath = DBManager.getConf().getSrcPath();
+        String poPackagePath = DBManager.getConf().getPoPackage().replace(".", "/");
+        File file = new File(srcPath + poPackagePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        BufferedWriter writer = null;
+        try{
+            writer = new BufferedWriter(new FileWriter(file.getAbsoluteFile() + "/"
+                    + StringUtils.firstChar2UpperCase(tableInfo.getTname()) + ".java"));
+            writer.write(src);
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                writer.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 }

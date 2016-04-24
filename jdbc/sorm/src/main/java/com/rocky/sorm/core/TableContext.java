@@ -66,13 +66,26 @@ public class TableContext {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        //更新类结构
+        updateJavaPOFile();
+    }
+
+    /**
+     * 根据表结构，更新配置的po包下面的java类
+     * 实现了从表结构转化到类结构
+     */
+    public static void updateJavaPOFile(){
+        Map<String,TableInfo> map = TableContext.tables;
+        for(TableInfo t:map.values()){
+            JavaFileUtils.createJavaPOFile(t,new MysqlTypeConverter());
+        }
     }
 
     public static void main(String[] args) {
         Map<String,TableInfo>  tables = TableContext.tables;
         TableInfo emp = tables.get("emp");
 
-        String src = JavaFileUtils.createJavaSrc(emp, new MysqlTypeConverter());
-        System.out.println(src);
+        JavaFileUtils.createJavaPOFile(emp, new MysqlTypeConverter());
     }
 }

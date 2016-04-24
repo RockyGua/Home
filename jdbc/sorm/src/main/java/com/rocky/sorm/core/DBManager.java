@@ -23,6 +23,7 @@ public class DBManager {
         conf.setPwd(props.getProperty("pwd"));
         conf.setUsingDB(props.getProperty("usingDB"));
         conf.setPoPackage(props.getProperty("poPackage"));
+        conf.setSrcPath(props.getProperty("srcPath"));
     }
 
     public static Connection getConnection(){
