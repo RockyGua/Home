@@ -10,7 +10,7 @@ public interface Query {
      * @param params 参数
      * @return 操作影响的行数
      */
-    public int executeDML(String sql, String[] params);
+    public int executeDML(String sql, Object[] params);
 
     /**
      * 讲一个对象存储在数据库中
@@ -23,7 +23,7 @@ public interface Query {
      * @param clazz 跟表对应的class类
      * @param id 主键的值
      */
-    public void delete(Class clazz, int id);
+    public void delete(Class clazz, Object id);
 
     /**
      * 删除对象在数据中对应的记录

@@ -3,6 +3,7 @@ package com.rocky.sorm.core;
 import com.rocky.sorm.bean.ColumnInfo;;
 import com.rocky.sorm.bean.TableInfo;
 import com.rocky.sorm.utils.JavaFileUtils;
+import com.rocky.sorm.utils.StringUtils;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -69,6 +70,9 @@ public class TableContext {
 
         //更新类结构
         updateJavaPOFile();
+
+        //加载PO包下面的类
+        loadPOTables();
     }
 
     /**
@@ -76,9 +80,24 @@ public class TableContext {
      * 实现了从表结构转化到类结构
      */
     public static void updateJavaPOFile(){
-        Map<String,TableInfo> map = TableContext.tables;
+        Map<String,TableInfo> map = tables;
         for(TableInfo t:map.values()){
             JavaFileUtils.createJavaPOFile(t,new MysqlTypeConverter());
+        }
+    }
+
+    /**
+     * 加载PO包下面的类
+     */
+    public static void loadPOTables() {
+        for (TableInfo tableInfo:tables.values()){
+            try {
+                Class clazz = Class.forName(DBManager.getConf().getPoPackage()
+                        + "." + StringUtils.firstChar2UpperCase(tableInfo.getTname()));
+                poClassTableMap.put(clazz, tableInfo);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
