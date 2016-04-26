@@ -3,6 +3,7 @@ package com.rocky.sorm.core;
 import com.rocky.po.Emp;
 import com.rocky.sorm.bean.ColumnInfo;
 import com.rocky.sorm.bean.TableInfo;
+import com.rocky.sorm.utils.JDBCUtils;
 import com.rocky.sorm.utils.ReflectUtils;
 
 import java.sql.Connection;
@@ -18,22 +19,20 @@ public class MysqlQuery implements Query {
         new MysqlQuery().delete(e);
     }
 
-
     public int executeDML(String sql, Object[] params) {
         Connection conn = DBManager.getConnection();
+        int count = 0;
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(sql);
-            for (int i=0; i<params.length; i++){
-                ps.setObject(i+1, params[i]);
-            }
-            ps.execute();
+            JDBCUtils.handleParams(ps, params);
+            count  = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBManager.close(ps, conn);
         }
-        return 0;
+        return count;
     }
 
     public void insert(Object obj) {
