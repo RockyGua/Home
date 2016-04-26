@@ -21,3 +21,4 @@ create table dept
 );
 
 alter table emp add constraint PK_id primary key(id);
+alter table emp modify id int auto_increment;
