@@ -17,13 +17,15 @@ public class MysqlQuery implements Query {
 
     public static void main(String[] args){
         Emp e = new Emp();
-//        e.setId(2);//已设置主键id为自增长，不需要再赋值
+        //已设置主键id为自增长，insert操作不需要再赋值
+        e.setId(1);
         e.setEmpname("rocky");
         e.setBirthday(new java.sql.Date(System.currentTimeMillis()));
-        e.setAge(30);
-        e.setSalary(3000.8);
+        e.setAge(31);
+        e.setSalary(5000.55);
 //		new MysqlQuery().delete(e);
-		new MysqlQuery().insert(e);
+//		new MysqlQuery().insert(e);
+        new MysqlQuery().update(e, new String[]{"empname", "age", "salary"});
     }
 
     public int executeDML(String sql, Object[] params) {
@@ -93,8 +95,31 @@ public class MysqlQuery implements Query {
         delete(clazz, param);
     }
 
+    /**
+     * @param obj 所要更新的对象
+     * @param fieldNames 要更新的字段
+     * @return 受影响的数量
+     */
     public int update(Object obj, String[] fieldNames) {
-        return 0;
+        //obj{"empname","age"}-->update emp  set empname=?,age=? where id=?
+        Class c = obj.getClass();
+        List<Object> params = new ArrayList<Object>();   //存储sql的参数对象
+        TableInfo tableInfo = TableContext.poClassTableMap.get(c);
+        ColumnInfo  priKey = tableInfo.getOnlyPriKey();   //获得唯一的主键
+        StringBuilder sql  = new StringBuilder("update "+tableInfo.getTname()+" set ");
+
+        for(String fname:fieldNames){
+            Object fvalue = ReflectUtils.invokeGet(fname,obj);
+            params.add(fvalue);
+            sql.append(fname+"=?,");
+        }
+        sql.setCharAt(sql.length()-1, ' ');
+        sql.append(" where ");
+        sql.append(priKey.getName()+"=? ");
+
+        params.add(ReflectUtils.invokeGet(priKey.getName(), obj));    //主键的值
+
+        return executeDML(sql.toString(), params.toArray());
     }
 
     public List queryRows(String sql, Class clazz, String[] params) {
