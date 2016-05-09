@@ -55,7 +55,7 @@ public interface Query {
      * @param params sql参数
      * @return 查询到的结果
      */
-    public Object queryUniqueRow(String sql, Class clazz, String[] params);
+    public Object queryUniqueRow(String sql, Class clazz, Object[] params);
 
     /**
      * 查询返回一个值（一行一列）
@@ -63,7 +63,7 @@ public interface Query {
      * @param params sql参数
      * @return 查询到的结果
      */
-    public Object queryValue(String sql, String[] params);
+    public Object queryValue(String sql, Object[] params);
 
     /**
      * 查询返回一个数字（一行一列）
@@ -71,5 +71,5 @@ public interface Query {
      * @param params sql参数
      * @return 查询到的数字
      */
-    public Number queryNumber(String sql, String[] params);
+    public Number queryNumber(String sql, Object[] params);
 }
