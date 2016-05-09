@@ -20,4 +20,20 @@ public class ReflectUtils {
             return null;
         }
     }
+    /**
+     * 调用obj对象对应属性fieldName的set方法
+     * @param obj
+     * @param columnName
+     * @param columnValue
+     */
+    public static void invokeSet(Object obj,String columnName,Object columnValue){
+        try {
+            Method m = obj.getClass().getDeclaredMethod("set" + StringUtils.firstChar2UpperCase(columnName),
+                    columnValue.getClass());
+            m.invoke(obj, columnValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

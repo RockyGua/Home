@@ -46,7 +46,7 @@ public interface Query {
      * @param params sql参数
      * @return 查询到的结果
      */
-    public List queryRows(String sql, Class clazz, String[] params);
+    public List queryRows(String sql, Class clazz, Object[] params);
 
     /**
      * 查询返回单条记录，并且封装到对应的clazz类对象中

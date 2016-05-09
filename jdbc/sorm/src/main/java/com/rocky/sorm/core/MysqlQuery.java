@@ -7,25 +7,33 @@ import com.rocky.sorm.utils.JDBCUtils;
 import com.rocky.sorm.utils.ReflectUtils;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MysqlQuery implements Query {
 
     public static void main(String[] args){
-        Emp e = new Emp();
-        //已设置主键id为自增长，insert操作不需要再赋值
-        e.setId(1);
-        e.setEmpname("rocky");
-        e.setBirthday(new java.sql.Date(System.currentTimeMillis()));
-        e.setAge(31);
-        e.setSalary(5000.55);
-//		new MysqlQuery().delete(e);
-//		new MysqlQuery().insert(e);
-        new MysqlQuery().update(e, new String[]{"empname", "age", "salary"});
+        /**
+            Emp e = new Emp();
+            //已设置主键id为自增长，insert操作不需要再赋值
+            e.setId(1);
+            e.setEmpname("rocky");
+            e.setBirthday(new java.sql.Date(System.currentTimeMillis()));
+            e.setAge(31);
+            e.setSalary(5000.55);
+    //		new MysqlQuery().delete(e);
+    //		new MysqlQuery().insert(e);
+            new MysqlQuery().update(e, new String[]{"empname", "age", "salary"});
+         */
+
+        List<Emp> list = new MysqlQuery().queryRows("select id,empname,age from emp where age>? and salary<?",
+                Emp.class, new Object[]{10, 5000});
+
+        for(Emp e:list){
+            System.out.println(e.getEmpname());
+        }
+
     }
 
     public int executeDML(String sql, Object[] params) {
@@ -122,8 +130,44 @@ public class MysqlQuery implements Query {
         return executeDML(sql.toString(), params.toArray());
     }
 
-    public List queryRows(String sql, Class clazz, String[] params) {
-        return null;
+    public List queryRows(String sql, Class clazz, Object[] params) {
+        Connection conn = DBManager.getConnection();
+        List list = null;    //存储查询结果的容器
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            //给sql设参
+            JDBCUtils.handleParams(ps, params);
+            System.out.println(ps);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData metaData = rs.getMetaData();
+            //多行
+            while(rs.next()){
+                if(list==null){
+                    list = new ArrayList();
+                }
+                Object rowObj = clazz.newInstance();   //调用javabean的无参构造器
+
+                //多列       select username ,pwd,age from user where id>? and age>18
+                for(int i=0;i<metaData.getColumnCount();i++){
+                    String columnName = metaData.getColumnLabel(i+1);  //username
+                    Object columnValue = rs.getObject(i+1);
+
+                    //调用rowObj对象的setUsername(String uname)方法，将columnValue的值设置进去
+                    ReflectUtils.invokeSet(rowObj, columnName, columnValue);
+                }
+
+                list.add(rowObj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            DBManager.close(ps, conn);
+        }
+
+        return list;
     }
 
     public Object queryUniqueRow(String sql, Class clazz, String[] params) {
