@@ -1,16 +1,5 @@
 package com.rocky.sorm.core;
 
-import com.rocky.po.Emp;
-import com.rocky.sorm.bean.ColumnInfo;
-import com.rocky.sorm.bean.TableInfo;
-import com.rocky.sorm.utils.JDBCUtils;
-import com.rocky.sorm.utils.ReflectUtils;
-
-import java.lang.reflect.Field;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class MysqlQuery extends Query{
 
     public static void main(String[] args) {

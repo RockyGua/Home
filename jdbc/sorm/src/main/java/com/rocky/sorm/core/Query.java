@@ -20,7 +20,7 @@ public abstract class Query {
      * @param back CallBack的实现类，实现回调
      * @return 查询结果
      */
-    public Object executeQueryTemplate(String sql,Object[] params,Class clazz,CallBack back){
+    public Object executeQueryTemplate(String sql,Object[] params,Class clazz,Callback back){
         Connection conn = DBManager.getConnection();
         PreparedStatement ps = null;
         try {
@@ -163,7 +163,7 @@ public abstract class Query {
      */
     public List queryRows(String sql, final Class clazz, Object[] params) {
 
-           return (List)executeQueryTemplate(sql, params, clazz, new CallBack() {
+           return (List)executeQueryTemplate(sql, params, clazz, new Callback() {
 
                 public Object doExecute(Connection conn, PreparedStatement ps, ResultSet rs) {
                     List list = null;
@@ -216,7 +216,7 @@ public abstract class Query {
      */
     public Object queryValue(String sql, Object[] params) {
 
-        return executeQueryTemplate(sql, params, null, new CallBack() {
+        return executeQueryTemplate(sql, params, null, new Callback() {
             public Object doExecute(Connection conn, PreparedStatement ps, ResultSet rs) {
                 Object value = null;
                 try {
