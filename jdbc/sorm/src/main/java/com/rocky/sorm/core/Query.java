@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Query {
+public abstract class Query implements Cloneable{
 
     /**
      * 采用模板方法模式将JDBC操作封装成模板，便于重用
@@ -239,5 +239,11 @@ public abstract class Query {
      */
     public Number queryNumber(String sql, Object[] params) {
         return (Number) queryValue(sql, params);
+    }
+
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

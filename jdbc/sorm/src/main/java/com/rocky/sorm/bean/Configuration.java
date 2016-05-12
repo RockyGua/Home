@@ -12,6 +12,7 @@ public class Configuration {
     private String usingDB;
     private String srcPath;
     private String poPackage;
+    private String queryClass;
 
     public Configuration() {
     }
@@ -80,5 +81,13 @@ public class Configuration {
 
     public void setPoPackage(String poPackage) {
         this.poPackage = poPackage;
+    }
+
+    public String getQueryClass() {
+        return queryClass;
+    }
+
+    public void setQueryClass(String queryClass) {
+        this.queryClass = queryClass;
     }
 }
