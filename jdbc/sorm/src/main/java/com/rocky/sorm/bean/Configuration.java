@@ -13,6 +13,8 @@ public class Configuration {
     private String srcPath;
     private String poPackage;
     private String queryClass;
+    private int poolMinSize;
+    private int poolMaxSize;
 
     public Configuration() {
     }
@@ -89,5 +91,21 @@ public class Configuration {
 
     public void setQueryClass(String queryClass) {
         this.queryClass = queryClass;
+    }
+
+    public int getPoolMinSize() {
+        return poolMinSize;
+    }
+
+    public void setPoolMinSize(int poolMinSize) {
+        this.poolMinSize = poolMinSize;
+    }
+
+    public int getPoolMaxSize() {
+        return poolMaxSize;
+    }
+
+    public void setPoolMaxSize(int poolMaxSize) {
+        this.poolMaxSize = poolMaxSize;
     }
 }
