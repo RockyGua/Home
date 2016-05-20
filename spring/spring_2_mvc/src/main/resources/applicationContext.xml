@@ -12,4 +12,9 @@
     <mvc:annotation-driven/>
     <context:annotation-config/>
 
+    <!--<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--作用：简化返回路径的书写。如：return "/WEB-INF/views/user.jsp" -&ndash;&gt; return "user"-->
+        <!--<property name="prefix" value="/WEB-INF/views/"/>-->
+        <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
 </beans>
